@@ -7,7 +7,7 @@ import org.delcom.app.entities.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class AuthContextTest {
+public class AuthContextTests {
     @Test
     @DisplayName("Membuat instance kelas AuthContext dengan benar")
     void testMembuatInstanceKelasAuthContextDenganBenar() {
