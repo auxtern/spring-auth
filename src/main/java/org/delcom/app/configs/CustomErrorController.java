@@ -26,15 +26,16 @@ public class CustomErrorController implements ErrorController {
         Map<String, Object> attributes = errorAttributes
                 .getErrorAttributes(webRequest, ErrorAttributeOptions.defaults());
 
+        int status = (int) attributes.getOrDefault("status", 500);
         String path = (String) attributes.getOrDefault("path", "unknown");
 
         Map<String, Object> body = Map.of(
                 "timestamp", LocalDateTime.now(),
-                "status", "error",
+                "status", status == 500 ? "error" : "fail",
                 "error", attributes.getOrDefault("error", "Unknown Error"),
                 "message", "Endpoint tidak ditemukan atau terjadi error",
                 "path", path);
 
-        return new ResponseEntity<>(body, HttpStatus.valueOf(500));
+        return new ResponseEntity<>(body, HttpStatus.valueOf(status));
     }
 }
